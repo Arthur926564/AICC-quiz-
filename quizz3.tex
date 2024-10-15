@@ -1,0 +1,237 @@
+\chapter{Quizz 3}
+Donc ce chapitre regroupe seulement la semaine 6.
+\\
+Ce qui est:
+\begin{itemize}
+    \item Summation
+    \item Algorithme
+    \item Pseudo-Code
+    \item Searching problème
+    \item Sorting problème
+\end{itemize}
+\section{Summation}
+\begin{definition}
+    Une Summation d'une sequence $\{a_n\}$ est l'addition des termes comme, \[a_m + a_{m+1} + ... + a_n\]
+    On écrit une summation :
+    \[\sum_{i=m}^n a_i\]
+\end{definition}
+\begin{framedremark}
+    Donc on voit ici introduit ce que sont les séries en analyse, on verra donc les mêmes théorème et les même convergence etc... C'est pourquoi cette section restera relativement sommaire.
+\end{framedremark}
+\paragraph{Summation sur des sets}
+Une somme basée sur une set $S$ est dénotée:
+\[\sum_{j\in S}a_j\]
+\begin{exemple}
+    Prenons $S = \{2, 5, 7, 10\}$, alors:
+    \[\sum_{j\in S}a_j = a_2 + a_5 + a_7 + a_{10}\]
+\end{exemple}
+on voit ici que la set $S$ est utiliser en tant qu'indice et non d'élément, pour rappelle une summation n'est qu'à partir d'une sequence donc, la set ne peut que servir en tant qu'indice.
+\\
+\begin{resume}
+    
+
+\begin{itemize}
+    \item Sums en tant que sequence, On peut donner la définition d'une sequence à partir d'une summation tel que : \[s_n = \sum_{j=0}^n f(j)\] Ce qui signifie que les éléments de la sequence $s_n$ proviennent de la summation. (il est important dans ce cas de figure de trouver la formule général de la sequence $s(n)$)
+    \item Il existe des formules tel que l'addition des carrées parfaits ou autre dans les cheat sheets, mais on laisse leurs preuves au lecteur car on l'a déjà eu durant les séries d'analyse lors des preuves par récurrence.
+\end{itemize}
+\end{resume}
+\section{Algorithme}
+\begin{definition}
+    Une set \textbf{finie} et \textbf{bien définie} d'instructions afin de performer une tâche spécifique.
+\end{definition}
+\\
+
+Pour exprimer un algorithme on utilise surtout le pseudo-code. 
+\begin{exemple}
+    \textbf{But}: trouver la valeur maximal dans une sequence fini d'entier.
+    \begin{algorithm}
+        \caption{Procedure max\_finder($a_1$, $a_2$, \dots, $a_n$)}
+\begin{algorithmic}[1]    \State $max \gets a_1$
+    \For{$i \gets 2$ to $n$}
+        \If{$max < a_i$}
+            \State $max \gets a_i$
+        \EndIf
+    \EndFor
+    \State \Return $max$
+\end{algorithmic}
+            
+    \end{algorithm}
+\begin{framedremark}
+    Si jamais il y a des \textbf{end if} et \textbf{end for} qui sont juste la pour préciser quand les loops ou autre s'arrêtent. Je crois pas qu'il y a en a dans le cours de base, c'est juste que si je les mets pas, ça fait bugger le fichier.
+\end{framedremark}
+\end{exemple}
+\subparagraph{Typical problem}
+\begin{itemize}
+    \item Sorting problème
+    \item Searching problème
+    \item Optimization problème
+
+\end{itemize}
+
+
+\paragraph{Linear search}
+\begin{definition}
+    Le linear search est un algorithme qui localise un éléments d'une liste en examinant tout les éléments de la liste une seul fois en partant du début jusqu'à trouver l'élément en question.
+\end{definition}
+\begin{algorithm}
+    \caption{linear\_search($x:$ l'élément qu'on cherche $a_1$, $a_2$, \dots, $a_n$) }
+    \begin{algorithmic}
+        \State $i \gets 1$
+        \State $location \gets -1$
+        \While {$i \leq n$ \And $x \neq a_i$}
+            \State {$i = i + 1$}
+        \EndWhile
+        \If{$i \leq n$}
+            \State $location \gets i$
+        \EndIf
+        \State \Return $location$
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{framedremark}
+    On voit donc ici que le nombre d'opération afin de pouvoir trouver l'éléments est linéaire.
+    \\
+    On est obligé de mettre la condition $i \leq n$ avant $x \neq a_i$ car si l'élément n'est pas dans la liste, on aura une error d'index.
+\end{framedremark}
+
+\paragraph{Binary search}
+\textbf{Attention!} cette algorithme ne fonction que lorsque la liste d'éléments est sorted.
+\\
+Voici les steps à faire:
+\begin{itemize}
+    \item L'algorithme commence par comparer l'élément avec celui trouvée au milieu de la liste.
+    \begin{itemize}
+        \item Si l'élément du mileu est plus petit, alors la recherche continue vers le côté le plus grand, donc la droite.
+        \item Si l'élément du milieu est plus grand, alors la recherche se fera du côté gauche de la liste (et on inclue l'élément du milieu ici)
+    \end{itemize}
+    \item On continue ce processus jusqu'à avoir un intervalle de taille $1$
+    \begin{itemize}
+        \item Si l'élément qu'on cherche est cette élément, alors on return l'indice de l'élément.
+        \item Sinon on return $-1$.
+    \end{itemize}
+    \begin{exemple}
+        Voici un exemple avec un schéma:
+        \begin{center}
+    
+
+\begin{tikzpicture}[
+    level/.style={sibling distance=60mm/#1},
+    level distance=12mm
+]
+
+\node[circle,draw] (root) {7}
+    child {node[circle,draw] (4) {4}
+        child {node[circle,draw] (3) {3}}
+        child {node[circle,draw] (5) {5}}
+    }
+    child {node[circle,draw] (9) {9}
+        child {node[circle,draw, red] (8) {8}}
+        child {node[circle,draw] (11) {11}}
+    };
+
+\node[above=0.5cm of root, text width=8cm, align=center] (text) { liste: $\{3, 4, 5, 7, 8, 9, 11\}$ \\ Nombre: 8};
+
+\draw[->] (text) -- (root);
+
+% Add middle comparison label between 4 and 7
+\node[right=0.5cm of root, xshift=-0.2cm] (midlabel) {7 < 8};
+
+
+% Add equality comparison labels
+\node[right=0.5cm of 9] (midlabel2) {8 < 9};
+
+\node[left=0.15cm of 8](equality) {8 == 8};
+
+
+\end{tikzpicture}
+\end{center}
+    \end{exemple}
+
+\begin{framedremark}
+    En gros, on peut le voir comme un algorithme qui divise et conquis (divide and conquer), il y a d'autres algorithmes avec la même méthode, notamment \textit{merge sort}.
+\end{framedremark}
+En pseudo-code:
+\begin{algorithm}
+    \caption{Procedure binary\_search($x$: integer, $a_1, a_2, \dots, a_n$: increasingly sorted integers)}
+\begin{algorithmic}[1]
+    \State $lb \gets 1$
+    \State $ub \gets n$
+    \State $location \gets -1$
+    \While{$lb < ub$}
+        \State $m \gets \left\lfloor \frac{lb + ub}{2} \right\rfloor$
+        \If{$x > a_m$}
+            \State $lb \gets m + 1$
+        \Else
+            \State $ub \gets m$
+        \EndIf
+    \EndWhile
+    \If{$x = a_{lb}$}
+        \State $location \gets lb$
+    \EndIf
+    \State \Return $location$
+\end{algorithmic}
+\end{algorithm}
+\subparagraph{Complexity}
+On peut facilment voir que l'algorithme prend en moyenne $\log_2(n)$ étapes pour faire.
+
+\paragraph{Sorting algorithm}
+
+\subparagraph{Selction sort}
+Ce qui se passe ici:
+\item On trouve le minimum
+\begin{itemize}
+    \item on le met au début de la liste
+    \item on met l'index du début décalé de 1
+
+\end{itemize}
+\item on retrouve le minimum
+\item On refait cette étape jusqu'à arriver que l'index soit à $n-1$
+\begin{algorithm}
+    \caption{Procedure selection\_sort($a_1, a_2, \dots, a_n$: array of integers)}
+\begin{algorithmic}[1]
+    \For{$i \gets 1$ to $n-1$}
+        \State $min_{index} \gets i$
+        \For{$j \gets i+1$ to $n$}
+            \If{$a_j < a_{min\_index}$}
+                \State $min_{index} \gets j$
+            \EndIf
+        \EndFor
+        \If{$min_{index} \neq i$}
+            \State swap $a_i$ and $a_{min\_index}$
+        \EndIf
+    \EndFor
+\end{algorithmic}
+
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Procedure bubble\_sort($a_1, a_2, \dots, a_n$: array of integers)}
+\begin{algorithmic}[1]
+    \For{$i \gets 1$ to $n-1$}
+        \For{$j \gets 1$ to $n-i$}
+            \If{$a_j > a_{j+1}$}
+                \State swap $a_j$ and $a_{j+1}$
+            \EndIf
+        \EndFor
+    \EndFor
+\end{algorithmic}
+
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Procedure insertion\_sort($a_1, a_2, \dots, a_n$: array of integers)}
+\begin{algorithmic}[1]
+    \For{$i \gets 2$ to $n$}
+        \State $key \gets a_i$
+        \State $j \gets i - 1$
+        \While{$j > 0$ and $a_j > key$}
+            \State $a_{j+1} \gets a_j$
+            \State $j \gets j - 1$
+        \EndWhile
+        \State $a_{j+1} \gets key$
+    \EndFor
+\end{algorithmic}
+
+\end{algorithm}
+
+\end{itemize}

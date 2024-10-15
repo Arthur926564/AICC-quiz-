@@ -1,0 +1,85 @@
+\usepackage{graphicx} % Required for 
+\usepackage{amsthm}
+\usepackage{mdframed}   
+\usepackage{amsmath}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\usepackage{pgf,pgfplots}
+\usetikzlibrary{math,arrows,positioning,shapes,fit,calc}
+\usepackage{kantlipsum}
+\usepackage{todonotes}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+ \usepackage{tikz,tkz-tab} 
+\usepackage{pgfplots}
+
+
+
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{patterns,snakes}
+\usepackage{xcolor,colortbl,array,amssymb}
+
+\colorlet{myred}{red!90!black}
+\colorlet{myblue}{blue!90!black}
+\colorlet{mypurple}{blue!50!red!80!black!80}
+\tikzstyle{vector}=[->,very thick,veccol]
+\usetikzlibrary{arrows.meta}
+\tikzstyle{thin arrow}=[dashed,thin,-{Latex[length=4,width=3]}]
+
+% les boites
+\newenvironment{deduction}
+  {\begin{tabular}{@{}>{}c<{}@{\enspace}>{}l<{}@{}}\arrayrulecolor{black!50}}
+  {\end{tabular}}
+\newcommand{\premise}[1]{&#1\\}
+\newcommand{\conclusion}[1]{\cline{2-2}\therefore&#1}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remarque}
+
+% Définir un environnement mdframed spécifique pour les remarques
+\newenvironment{framedremark}
+  {\begin{mdframed}[backgroundcolor=orange!7, linecolor=orange!20, linewidth=1pt]\begin{remark}}
+  {\end{remark}\end{mdframed}}
+
+\newtheorem{resume1}{Résumé}
+\newenvironment{resume}
+    {\begin{mdframed}[backgroundcolor=gray!7, linecolor=black!20, linewidth=1pt]\begin{resume1}}
+    {\end{resume1}\end{mdframed}}
+
+\newenvironment{framedate}
+{
+    \begin{mdframed}[backgroundcolor=white, linecolor=gray, linewidth=0.5pt]\begin{date}}
+    {\end{date}\end{mdframed}}
+
+  \newtheorem{exemple}{Exemple}
+
+\newtheorem{definition1}{Définition}
+\newenvironment{definition}
+{
+    \begin{mdframed}[backgroundcolor=blue!7, linecolor=blue!20, linewidth=1pt]\begin{definition1}}
+    {\end{definition1}\end{mdframed}}
+\setlength\parindent{0pt}
+
+
+%snippets commande vite fait
+\newcommand{\R}[0]{$\mathbb{R}$}
+\newcommand{\Z}[0]{$\mathbb{Z}$}
+\newcommand{\Q}[0]{$\mathbb{Q}$}
+
+\setuptodonotes{color=blue!30}
+\newcommand{\note}[1]{\todo[color=green!40]{#1}}
+
+

@@ -1,0 +1,296 @@
+\chapter{Quizz 1}
+
+
+\section{Notation}
+\begin{itemize}
+    \item \textbf{Atomic propositions: } C'est une proposition qui ne peut pas être décrite comme une simple (seul) variable (i.e $p$).
+    \item \textbf{Compound propositions} sont construit à partir \textbf{d'équivalence logique} et de variable (i.e p, q).
+\end{itemize}
+Liste des connecteurs :
+\begin{itemize}
+    \item Negation : $\neg$ (pas p)
+    \item Conjonction : $\wedge$ (p et q)
+    \item Disjonction : $\vee$ (p ou q)
+    \item XOR : $\oplus$ (p et q sont différents)
+    \item Implication : $\implies$ (si p then q)
+    \item Biconditionel $\iff$ (p et q sont équivalent)
+\end{itemize}
+\subsection{Classification des proposition}
+
+\begin{itemize}
+    \item A \textbf{Tautology} est une proposition qui est toujours vrai quelque soit la valeur des propositions.
+    \item  A \textbf{Contradiction} est le contraire, une proposition qui est toujours fausse.
+    \item A \textbf{contingency} est une proposition qui peut être les deux
+    \item A compound proposition est \textbf{satisfiable} si elle n'est pas une contradiction (si il y a un set (ou plus) de variables qui la rend vrai).
+\end{itemize}
+
+Le but lorsqu'on a un exercice avec des questions sur ces définition est de voir s'il existe un contre exemple (i.e si pour une tautology il existe un set qui est faux) afin de pouvoir en premier lieu comprendre comment la proposition se comporte, et en deuxième, de peut être, trouver un contre exemple.
+
+Il existe 2 autre méthode que le contre exemple :
+\begin{itemize}
+    \item Truth table : Simple à faire mais prend beaucoup de temps ($2^n$ pour une proposition de taille $n$)
+    \item Faire une preuve par équivalence : Beaucoup plus rapide, mais pas toujours simple. 
+\end{itemize}
+Pour la preuve on utilise les relations disponible sur les cheats sheets.
+
+
+
+\subsection{DNF}
+\begin{itemize}
+    \item \textbf{DNF} : une disjonction d'une ou de plusieurs variables.
+    \item Example de la DNF de $p \oplus q$ est $(p \wedge \neg q) \vee (\neg p\wedge q)$
+    \item \textbf{Full DNF} : Si toute les variables ou leur négation sont représentées exactement une fois dans chaque minterm.
+\end{itemize}
+Les DNF et CNF sont des \textbf{Equivalences} des propositions de base. Elles ne changent pas les truth table de ces dernières. Une DNF esten quelque sorte la "façon" dont on a juste à lire les variables pour comprendre quand la proposition est vrai. Pour le XOR, cela nous permet de comprendre plus facilement que le xor est true quand $p$ et $q$ sont différent. 
+\\
+La règle général pour les DNF est qu'il faut des $\wedge$ entre les variables et des $\vee$ entre les minterms (les parenthèses).
+
+\subsection{CNF}
+\begin{itemize}
+    \item \textbf{CNF} : une conjonction d'une ou de plusieurs variable.
+    \item Exemple de la cnf de $p\oplus q$ est $(p\vee q) \wedge (\neg p \vee \neg q)$
+    \item \textbf{Full CNF} : si toute les variables ou leur négation sont représentées exactement une fois dans chaque clause.
+\end{itemize}
+Comme dit auparavant, une CNF est équivalente à la proposition de base. la différence est plutôt qu'ici au lieu de dire "ce qu'il faut faire" pour que se soit juste, on dit plutôt "ce qu'il ne faut pas faire" afin d'être juste. Pour construire une CNF, il suffit donc de mettre des $\wedge$ entre chaque maxterm et des $\vee$ entre chaque terme.
+
+\subsubsection{Construction de CNF/DNF}
+Il y a deux méthode afin d'en construire :
+\begin{itemize}
+    \item A partir du truth table
+    \item Grâce au équivalence
+\end{itemize}
+La deuxième est plus élégante et moins coûteuse en temps lors de plus grande propositions. les équivalences les plus utiles sont celle de la distributivité et la loi de Morgan. 
+\\
+\textbf{Attention}, lorsqu'on demande les full CNF/DNF n'oubliez pas de rajouter les termes manquants. Si pour une DNF vous avez \begin{equation*}
+    \neg s \vee (p \wedge \neg q)
+\end{equation*}
+Ceci n'est \textbf{pas} la full DNF. Il faudrait pour que cela le devienne, rajouter tout les possibilités des autre variables (ce qui est un peu chiant mais voilà). $(\neg S \wedge p \wedge q) \vee (\neg s \wedge \neg p \wedge q )\vee ... $  jusqu'à tout les possibilité pour que $\neg s$ soit true)
+
+\section{Quantifieurs}
+Pour les quantifieurs comme $\forall$ ou $\exists$, la chose où faire attention est le domaine ou le quantifieur prends place ($\forall x P(x)$ peut être vrai pour le domaine des entiers mais pas pour celui des réels).
+\subsubsection{Négation}
+\begin{itemize}
+    \item Négation de $\forall x P(x)$ est qu'il en existe un tq ($\neg\forall x P(x) = \exists x \neg P(x)$
+    \item négation de $\exists x P(x)$ est que $P(x)$ est faux pour tout x : $\neg\exists x P(x) = \forall x \negP(x)$
+\end{itemize}
+C'est un peu comme la loi de Morgan pour les quantifieurs, lorsqu'on met au négatif on change d'existentiel à universel et vis versa.
+
+\subsubsection{Ordre des quantifieurs}
+Pour les quantifieurs, l'ordre est important car par exemple $\forall x \exists y$ est pas dutout la même chose que $\exists x \forall y$ (Vous pouvez aller voir sur les reminder slides de la semaine 2 il y a un très bon schéma qui explique bien).
+\\
+Ce que $\forall x \exists y P(x, y)$ veut dire est : Pour tout x, il existe un y (c'est comme la surjectivité d'une fonction). Ce que $\exists x \forall y P(x, y)$ veut dire, est : il existe un x (ou plusieurs) ou \textbf{tout} les y "correspondent".
+% peut être mettre un exemple afin de  mieux comprendre (genre l'exo de l'examen 2021)
+\\
+Lorsqu'on a des quantifieurs avec des relations de logiques et des équivalences, un bon moyen de résoudre l'exercice et de convertir les relations logique à des variables afin de rendre la ligne moins lourd à lire.
+\\
+Par exemple :
+\begin{equation*}
+    \forall x \forall y ((x > 0) \wedge (y > o) \implies (x + y > 0))
+\end{equation*}
+Pour alleger on peut écrire $(x > 0) = q$, $(y > 0) = q$ et $(x + y > 0) = r$
+\begin{equation*}
+    \forall x \forall y ((p \wedge q) \implies r)
+\end{equation*}
+Attention, c'est légal ici car les deux quantifieurs sont les mêmes et que les relations logique sont de les même quantifieurs (il y a une parenthèse qui couvre tout).
+\begin{equation*}
+    \forall x \forall y (\neg(p\wedge q) \vee r)
+\end{equation*}
+\begin{equation*}
+    \forall x \forall y (\neg p \vee q) \vee r
+\end{equation*}
+Et donc finalement :
+\begin{equation*}
+    \forall x \forall y ((x <= 0) \vee (y <= 0) \vee (x+y = 0)
+\end{equation*}
+C'est pas forcémment utile ici mais c'est pour montrer.
+\\
+On peut aussi comme auparavant voir si une relation avec des quantifieurs est valid (analogie d'une tautologie en propositional logic) ou autre, prenons par exemple : 
+\begin{equation*}
+    \forall x \neg S(X) \iff \neg\exists x S(x=
+\end{equation*}
+La partie gauche traduite en français équivaut à "Pour tout x, $S(x)$ est faux. La partie droite quand à elle dit : $\neg$(il existe un x tel que $S(x)$ est vrai), ce qui veut dire : "Pour tout x $S(x)$ est faux" on voit donc que le statement est valid (qu'il est vrai pour tout domain et pour tout fonction de logique propositionel).
+\\
+Si on le fait avec des maths ça donne : 
+\\
+On utilise la négation de $\exists$ qui donne : 
+\begin{align*}
+    \forall x \neg S(x) \iff \neg (\exists x S(x)) \\
+    \forall x \neg S(x) \iff \forall x \neg S(x)
+\end{align*}
+On voit bien que les deux côtés sont équivalents.
+
+Voir les exos 2.5, 2.7, 2.8, 2.10
+
+\section{Argument}
+\begin{itemize}
+    \item An \textbf{argument} en logique propositionnel (propositional) est une séquence de proposition.
+    \begin{itemize}
+        \item Tout les proposition sauf la final sont appellées \textbf{premises}.
+        \item La dernière déclaration est appelée la \textbf{conclusion}
+        \item l'argument/argumentation est valid \textbf{iff} (si et seulement si) les premises impliques la conclusion.
+    \end{itemize}
+\end{itemize}
+Pour qu'un argument marche le but est de faire "étapes par étapes" on prends la première étape qu'on sait qui est vrai comme par exemple : $p \implies q$ et nous rajoutons un autre argument que nous savons qui est vrai comme $p$. Nous savons que par la définition de l'implication que si l'implication est true il n'y a que deux manières : 
+\begin{itemize}
+    \item $p$ est faux
+    \item $p$ et $q$ sont les deux vrai
+\end{itemize}
+ comme nous mettons l'argument $p$ qui est donc vrai en tout les cas, nous pouvons donc conclure que $q$ est vrai ce qui donne :
+
+\hspace{0.4cm}
+
+\begin{deduction}
+\premise{p \to q}
+\premise{p}
+\conclusion{q}
+\end{deduction}
+
+\hspace{0.4cm}
+
+Si on parle en français avec un exemple tq : $p = $ "\textit{it rains}" et $q = $"\textit{the ground is wet}", nous avons que $p \implies q$ est : \textit{if it rains, then the ground is wet}. 
+\\ En argumentatif ça donne :
+
+\hspace{0.4cm}
+
+\begin{deduction}
+    \premise{if it rains, then the ground will be wet}
+    \premise{it is raining}
+    \conclusion{Therefore, the ground will be wet}
+\end{deduction}
+
+\hspace{0.4cm}
+\\
+
+On voit bien ici que comment fonctionne l'argumentation. 
+\\
+Un argument en propositional logic est une sécquence de propositions.
+\begin{itemize}
+    \item Un \textbf{inference rules} est un argument "simple" qui est utilisé afin de construire des formes plus complexe.
+\end{itemize}
+
+C'est le même principe qu'avec les autres types de logique ( les équivalences logiques: loi de Morgan, distributivité, loi d'associativité, etc...). Un exemple simple a été montré juste en-dessus, le Modus ponens. La tautologie de ce dernier est donnée par :
+
+\begin{equation*}
+    (p\wedge(p\implies q)) \implies q
+\end{equation*}
+\\
+Un autre exemple qui permet de mieux faire le lien et la conjonction qui est donnée par : 
+
+\begin{deduction}
+    \premise{p}
+    \premise{q}
+    \conclusion{$p \wedge q$}
+\end{deduction}
+\\
+\hspace{0.4cm}
+
+La tautologie de ce dernier est données par :
+\begin{equation*}
+    ((p)\wedge(q)) \implies (p\wedge q)
+\end{equation*}
+On voit ici assez clairement que si :
+\begin{itemize}
+    \item On a p
+    \item On a q
+    \item Alors on a p et q
+\end{itemize}
+
+Quelque chose de "plus" intéressant on peut essayer de trouver :
+
+\begin{deduction}
+    \premise{$p \vee q$}
+    \premise{\neg p}
+    \conclusion{q}
+\end{deduction}
+\\
+\hspace{0.4cm}
+
+On dit ici que $p$ ou $q$. On dit ensuite que on "n'a pas" $p$ alors on a forcément q. Le moyen de le retranscrire en propositions est de dire $p$ ou $q$ et pas $p$. Ce qui donne : 
+\begin{equation*}
+    (p \vee q) \wedge \neg p
+\end{equation*}
+Si on utilise la loi d'assiociativité :
+\begin{equation*}
+    (p \wedge \neg p) \vee (q \wedge \neg p)
+\end{equation*}
+Comme la première partie est une contradiction et qu'il y a un ou au milieu, on peut l'enlever :
+\begin{equation*}
+    q \wedge \neg p
+\end{equation*} 
+Et donc comme $\neg p$ alors $q$ est vrai.
+\\
+Finalement nous avons donc :
+\begin{equation*}
+    ((p\vee q) \wedge \neg p) \implies q
+\end{equation*}
+
+
+\subsection{Argument avec les quantifieurs}
+On peut maintenant dire utiliser des $\forall$ et $\exists$ avec des arguments. Un exemple avec le Modus Ponens est :
+
+\begin{deduction}
+    \premise{$\forall x (P(x) \implies Q(x)$}
+    \premise{$P(a)$, où a est un élément particulier du domaine}
+    \conclusion{$Q(a)$}
+\end{deduction}
+\hspace{0.4cm}
+\\
+
+En français, Si pour tout x $P(x)$ implique $Q(x)$ et qu'on prend un élément particulier dans le domaine tel que $P(a)$ alors cette élément est vrai pour $Q(x)$.
+Attention! Quand on dit $\forall x (P(x) \implies Q(x)$ cela ne veut pas dutout dire que : $\forall x P(x)$. Pour rappel $\forall x (P(x) \implies Q(x)$ veut dire que si x est juste sur $P(x)$, il est aussi sur $Q(x)$. Mais x peut très bien être faux sur $P(x)$ .
+\\
+Attention à ne pas confondre les "instantiation" et les "generalization" Il y en a qui dit qu'on peut en prendre un random et que ducoup ça marche pour tous (Universal generalization) et un autre qui dit que ça marche pour tous et que donc on peut un prendre un quelconque (Universal instantiation). Il y a tout les infos sur ça sur la cheat sheet de la semaine 3 si jamais.
+
+\section{Preuves}
+Il y a deux grands types de preuves : 
+\begin{itemize}
+    \item Direct, contraposition, contradiction, by cases
+    \item constructive non-constructive
+\end{itemize}
+
+Pour les preuves par cas, Il existe trois types:
+\begin{itemize}
+    \item Preuves cas par cas ($((p_1 \vee p_2 \vee p_n) \implies q) \iff ((p_1 \implies q) \wedge (p_2 \implies q) \wedge ... \wedge)$ \\
+    qui peut très vite se retrouver trop lente si on traite vraiment chaque cas, mais elle peut toujours être utiles si les cas son par exemple : $x < 0$, $x = 0$ et $x < 0$.
+    \item Preuve par existence ($\exists xP(x)$) Donc le but c'est de trouver un exemple. On peut aussi montrer un contre-exemple qui est aussi un preuve par existence et qui est ducoup une preuve par contradiction.
+    \item Preuve d'unicité ($\exists !xP(x)$) cette preuve a deux étapes : 
+    \begin{itemize}
+        \item Prouver l'existence qu'il en existe un
+        \item Prouver que si $x$ et $x$ ont la propriété qu'on veut alors $x = y$
+    \end{itemize}
+\end{itemize}
+\\
+Attention avec les arguements valides, souvent ça arrive qu'une premises est fausse bien qu'on utilise des inferences rules qui sont juste.
+
+\subsection{Exemple preuve par l'absurde :}
+
+\textbf{Prouver que $\sqrt{2}$ est irrationel}.
+\\
+Pour se faire on va utiliser la preuve par contradiction qui signifie qu'on prend $\neg p$ et arrive jusqu'à la conclusion que $p \wedge \neg q$ est true. On aurait pu aussi utilisé la preuve par contraposition qui part aussi de $\neg p$ et qui grâce à des axiomes et des théorèmes on arrive à $\neg p \implies \neg q$ et comme on connaît la relation $p \implies q =_ \neg p \implies \neg q$ on trouve que $p$.
+\\
+\begin{enumerate}
+    \item $\sqrt{2}$ est rationnel , $\neg p$ [premise]
+    \item Soit $a, b \in \mathbb{Z}$ tel que $\sqrt{2} = \frac{a}{b}$ et que la fraction est réduite. [premise]
+    \item $2 = \frac{a^2}{b^2}$ therefore $2b^2 = a^2$
+    \item on conclus donc que $a^2$ est pair
+    \item si $a^2$ est pair, alors $a$ est pair (c'est le contraire de la preuve qu'on fait juste après)
+    \item Si $a$ est pair, alors $a$ peut s'écrire tq : $a = 2m$ où $m \in \mathbb{Z}$.
+    \item donc comme $2b^2 = 4m^2$, $b^2$ est pair.
+    \item De la même façon, $b$ est pair et $b = 2n$
+    \item on a donc que $\sqrt{2} = \frac{2n}{2m}$ ce qui est une contradiction de la première premise.
+    \item $\sqrt{2}$ est irrationel.
+
+\end{enumerate}
+
+\subsection{Preuve par contraposition}
+Maintenant on va prouver que si $n^2$ est impair alors $n$ est impair (qui est un lemme qu'on a utilisé de la sous-section précédente).
+\begin{enumerate}
+    \item $n^2$ est impair
+    \item $n$ est pair (on à la le $p \wedge \neg q$)
+    \item Si n est pair on a que $n = 2m$
+    \item donc $n^2 = 4m^2$
+    \item on a donc que $n^2$ est pair ce qui est une contraposition.
+    \item $n$ est donc impair
+\end{enumerate}
+La différence est qu'on prend un implication ($p \implies q$) et on lui met $\neg q$ et on voit que cela donne $\neg p$. c'est de la que vient la preuve. On a donc aussi ce qui vient avec cette preuve, $\neg p \implies \neg q$ qui dit que si $n^2$ est pair, alors n est aussi pair.
+
